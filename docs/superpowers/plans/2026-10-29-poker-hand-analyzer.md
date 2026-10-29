@@ -201,7 +201,7 @@ class LLMNarrator:
 - Consumes: нет
 - Produces: пакет `poker_handline`, команда `pytest`
 
-- [ ] **Step 1: Добавить `pyproject.toml`**
+- [x] **Step 1: Добавить `pyproject.toml`**
 
 ```toml
 [project]
@@ -232,7 +232,7 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 ```
 
-- [ ] **Step 2: Пустой пакет**
+- [x] **Step 2: Пустой пакет**
 
 `src/poker_handline/__init__.py` содержит версию:
 
@@ -240,7 +240,7 @@ testpaths = ["tests"]
 __version__ = "0.1.0"
 ```
 
-- [ ] **Step 3: Установить и проверить, что pytest запускается**
+- [x] **Step 3: Установить и проверить, что pytest запускается**
 
 ```powershell
 py -3.12 -m venv .venv
@@ -250,7 +250,7 @@ py -3.12 -m venv .venv
 
 Ожидание: `no tests ran` и код выхода 5, либо 0 если pytest настроен с `--override-ini` не нужен. Достаточно, что интерпретатор 3.12 и pytest импортируются. Если `py -3.12` нет, остановиться и поставить 3.12, а не писать под 3.11: в аннотациях ниже используется синтаксис 3.12.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add pyproject.toml src/poker_handline/__init__.py
