@@ -926,7 +926,7 @@ python -m poker_handline.cli --hero AsKh --board "Td 9c 2s" --villain QQ+ --pot 
 
 Код выхода 0 при успехе, 2 при `ValueError` (текст ошибки в stderr). Если заданы все три переменные `POKER_HANDLINE_LLM_BASE_URL`, `POKER_HANDLINE_LLM_API_KEY`, `POKER_HANDLINE_LLM_MODEL`, CLI пробует `LLMNarrator` и при любом исключении печатает шаблон. Без переменных сразу шаблон. Тест LLM в CLI не ходит в сеть: подменить нарратор функцией-фабрикой `narrator_factory`, аргумент `main`.
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import pytest
@@ -953,7 +953,7 @@ def test_cli_rejects_bad_cards(capsys):
     assert err
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_cli.py -v
@@ -961,11 +961,11 @@ def test_cli_rejects_bad_cards(capsys):
 
 Ожидание: FAIL, модуль `cli` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 `argparse`. `--hero` и `--villain` обязательны. `--board` по умолчанию `""`. `--pot` и `--to-call` — `int`. `--trials` по умолчанию 10000, `--seed` по умолчанию 0. Собрать отчёт, напечатать пять строк и абзац. Исключение `ValueError` — stderr и код 2. Прочие исключения нарратора поймать только вокруг `narrate`.
 
-- [ ] **Step 4: Тест зелёный и ручной прогон**
+- [x] **Step 4: Тест зелёный и ручной прогон**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_cli.py -v
@@ -974,7 +974,7 @@ def test_cli_rejects_bad_cards(capsys):
 
 Ожидание: pytest PASS, в консоли решение `call` и эквити `100,0%`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/cli.py tests/test_cli.py
