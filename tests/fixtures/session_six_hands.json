@@ -1,0 +1,76 @@
+[
+  {
+    "hand_id": "h1",
+    "position": "BTN",
+    "saw_flop": false,
+    "went_to_showdown": false,
+    "won_at_showdown": false,
+    "result_bb": 1.5,
+    "actions": [
+      {"street": "preflop", "actor": "hero", "kind": "raise", "amount_bb": 2.5}
+    ]
+  },
+  {
+    "hand_id": "h2",
+    "position": "BB",
+    "saw_flop": true,
+    "went_to_showdown": false,
+    "won_at_showdown": false,
+    "result_bb": 0,
+    "actions": [
+      {"street": "preflop", "actor": "hero", "kind": "check", "amount_bb": 0},
+      {"street": "flop", "actor": "hero", "kind": "check", "amount_bb": 0}
+    ]
+  },
+  {
+    "hand_id": "h3",
+    "position": "CO",
+    "saw_flop": true,
+    "went_to_showdown": true,
+    "won_at_showdown": false,
+    "result_bb": -5,
+    "actions": [
+      {"street": "preflop", "actor": "villain", "kind": "raise", "amount_bb": 2.5},
+      {"street": "preflop", "actor": "hero", "kind": "call", "amount_bb": 2.5},
+      {"street": "flop", "actor": "hero", "kind": "call", "amount_bb": 3.0}
+    ]
+  },
+  {
+    "hand_id": "h4",
+    "position": "BTN",
+    "saw_flop": true,
+    "went_to_showdown": false,
+    "won_at_showdown": false,
+    "result_bb": 6,
+    "actions": [
+      {"street": "preflop", "actor": "hero", "kind": "raise", "amount_bb": 2.5},
+      {"street": "preflop", "actor": "villain", "kind": "call", "amount_bb": 2.5},
+      {"street": "flop", "actor": "hero", "kind": "bet", "amount_bb": 3.0}
+    ]
+  },
+  {
+    "hand_id": "h5",
+    "position": "BTN",
+    "saw_flop": true,
+    "went_to_showdown": false,
+    "won_at_showdown": false,
+    "result_bb": -2,
+    "actions": [
+      {"street": "preflop", "actor": "hero", "kind": "raise", "amount_bb": 2.5},
+      {"street": "preflop", "actor": "villain", "kind": "call", "amount_bb": 2.5},
+      {"street": "flop", "actor": "hero", "kind": "check", "amount_bb": 0}
+    ]
+  },
+  {
+    "hand_id": "h6",
+    "position": "HJ",
+    "saw_flop": false,
+    "went_to_showdown": false,
+    "won_at_showdown": false,
+    "result_bb": 4,
+    "actions": [
+      {"street": "preflop", "actor": "villain", "kind": "raise", "amount_bb": 2.5},
+      {"street": "preflop", "actor": "hero", "kind": "raise", "amount_bb": 8.0}
+    ]
+  }
+]

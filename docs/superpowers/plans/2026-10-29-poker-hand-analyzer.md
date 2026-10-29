@@ -1199,7 +1199,7 @@ VPIP не считает обязательный блайнд. В этой мо
 
 Итог, его и утверждает тест: `hands == 6`, `vpip == 5/6`, `pfr == 4/6`, `three_bet == 1/2`, `af == 1.0`, `cbet_flop == 1/2`, `wtsd == 1/4`, `wsd == 0.0`, `net_bb == 4.5`.
 
-- [ ] **Step 1: Фикстура и падающий тест**
+- [x] **Step 1: Фикстура и падающий тест**
 
 `tests/fixtures/session_six_hands.json` — JSON-массив этих шести рук. У каждого действия поля `street`, `actor`, `kind`, `amount_bb`. Суммы: рейз открытия `2.5`, колл `2.5`, флоп-бет и флоп-колл в `h3`/`h4` по `3.0`, 3bet в `h6` — `8.0`, чеки — `0`.
 
@@ -1239,11 +1239,11 @@ def test_showdown_flag_without_flop_is_rejected():
         )
 ```
 
-- [ ] **Step 2: Реализация `summarize` ровно по таблице определений**
+- [x] **Step 2: Реализация `summarize` ровно по таблице определений**
 
 Не добавлять «похожие» статы (steal, fold to cbet), пока на них нет строки в таблице и руки в фикстуре.
 
-- [ ] **Step 3: PASS и commit**
+- [x] **Step 3: PASS и commit**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_stats.py -v
