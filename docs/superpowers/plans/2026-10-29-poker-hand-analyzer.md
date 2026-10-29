@@ -1262,7 +1262,7 @@ git commit -m "feat: summarize a session of structured hands"
 
 Ключи — только позиции, которые встретились. Внутри тот же словарь, что у `summarize`.
 
-- [ ] **Step 1: Тест на той же фикстуре**
+- [x] **Step 1: Тест на той же фикстуре**
 
 ```python
 def test_button_and_big_blind_slices():
@@ -1273,9 +1273,9 @@ def test_button_and_big_blind_slices():
     assert set(by_pos) == {"BTN", "BB", "CO", "HJ"}
 ```
 
-- [ ] **Step 2: Реализация группирует руки по `position` и вызывает `summarize`**
+- [x] **Step 2: Реализация группирует руки по `position` и вызывает `summarize`**
 
-- [ ] **Step 3: PASS и commit**
+- [x] **Step 3: PASS и commit**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_stats.py -v

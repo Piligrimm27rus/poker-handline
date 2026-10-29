@@ -1,6 +1,6 @@
 import pytest
 
-from poker_handline.stats import load_session, parse_hand, summarize
+from poker_handline.stats import load_session, parse_hand, summarize, summarize_by_position
 
 
 def test_six_hand_fixture_matches_the_manual_tally():
@@ -31,3 +31,11 @@ def test_showdown_flag_without_flop_is_rejected():
                 "actions": [],
             }
         )
+
+
+def test_button_and_big_blind_slices():
+    hands = load_session("tests/fixtures/session_six_hands.json")
+    by_pos = summarize_by_position(hands)
+    assert by_pos["BTN"]["hands"] == 3
+    assert by_pos["BB"]["vpip"] == 0.0
+    assert set(by_pos) == {"BTN", "BB", "CO", "HJ"}

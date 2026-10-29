@@ -104,6 +104,13 @@ def summarize(hands: Sequence[SessionHand]) -> dict[str, float | int | None]:
     }
 
 
+def summarize_by_position(hands: Sequence[SessionHand]) -> dict[str, dict[str, float | int | None]]:
+    grouped: dict[str, list[SessionHand]] = {}
+    for hand in hands:
+        grouped.setdefault(hand.position, []).append(hand)
+    return {position: summarize(group) for position, group in grouped.items()}
+
+
 def _parse_action(data: dict) -> Action:
     street = data["street"]
     actor = data["actor"]
