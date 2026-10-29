@@ -619,7 +619,7 @@ git commit -m "feat: expand hold'em range notation into combos"
 
 `share = win + tie / 2`.
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 from poker_handline.equity import equity
@@ -668,7 +668,7 @@ def test_flop_is_exact_and_partial_board_rejected():
         equity("AsKh", "QQ", "Td")
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_equity.py -v
@@ -676,7 +676,7 @@ def test_flop_is_exact_and_partial_board_rejected():
 
 Ожидание: FAIL, модуль `equity` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 Проверить: у героя 2 карты, борд 0/3/4/5, пересечений карт нет. `expand_range(villain, dead=hero+board)`.
 
@@ -686,7 +686,7 @@ Monte Carlo (только пустой борд): `random.Random(seed)`, на к
 
 Не писать отдельный «приблизительный» флоп: флоп и тёрн в тестах выше обязаны быть exact.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_equity.py -v
@@ -694,7 +694,7 @@ Monte Carlo (только пустой борд): `random.Random(seed)`, на к
 
 Ожидание: PASS. Префлоп-тест с 8000 trial должен укладываться в 3 процентных пункта при `seed=1`. Если на этой машине вылез за допуск — не расширять допуск молча; сначала проверить, что сид реально передаётся в `random.Random` и что ничьи считаются как половина.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/equity.py tests/test_equity.py
