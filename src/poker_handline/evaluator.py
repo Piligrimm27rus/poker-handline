@@ -1,6 +1,7 @@
 from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass
+from itertools import combinations
 
 from poker_handline.cards import Card
 
@@ -52,6 +53,15 @@ def rank_five(cards: Sequence[Card]) -> HandRank:
     if counts[0] == 2:
         return _hand(1, tuple(rank for rank, _ in grouped))
     return _hand(0, tuple(ranks))
+
+
+def best_hand(cards: Sequence[Card]) -> HandRank:
+    if len(cards) not in (5, 6, 7):
+        raise ValueError(f"expected 5, 6, or 7 cards, got {len(cards)}")
+    return max(
+        (rank_five(combo) for combo in combinations(cards, 5)),
+        key=lambda hand: hand.key(),
+    )
 
 
 def _hand(category: int, kickers: tuple[int, ...], name: str | None = None) -> HandRank:

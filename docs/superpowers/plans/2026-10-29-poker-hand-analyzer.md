@@ -440,7 +440,7 @@ git commit -m "feat: rank five-card hold'em hands"
 - Consumes: `rank_five`
 - Produces: `best_hand(cards) -> HandRank`
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import pytest
@@ -471,7 +471,7 @@ def test_board_length_other_than_five_six_seven_rejected():
         best_hand(parse_cards("As Kd Qc Jh"))
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_evaluator.py::test_seven_cards_picks_full_house_not_two_pair -v
@@ -479,11 +479,11 @@ def test_board_length_other_than_five_six_seven_rejected():
 
 Ожидание: FAIL, `best_hand` не определён.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 `best_hand` принимает 5, 6 или 7 различных карт. Для каждой комбинации `itertools.combinations(cards, 5)` считает `rank_five` и оставляет максимум по `key()`. На 7 картах это 21 комбинация.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_evaluator.py -v
@@ -491,7 +491,7 @@ def test_board_length_other_than_five_six_seven_rejected():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/evaluator.py tests/test_evaluator.py

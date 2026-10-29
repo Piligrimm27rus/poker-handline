@@ -1,5 +1,7 @@
+import pytest
+
 from poker_handline.cards import parse_cards
-from poker_handline.evaluator import rank_five
+from poker_handline.evaluator import best_hand, rank_five
 
 
 def rank(text: str):
@@ -32,3 +34,25 @@ def test_wheel_is_not_a_broadway_straight():
 
 def test_pair_kicker_order():
     assert rank("Ah Ad Ks Qd 2c").key() > rank("Ah Ad Qs Jd 9c").key()
+
+
+def test_seven_cards_picks_full_house_not_two_pair():
+    cards = parse_cards("Ah Ad As Kd Kc 2c 2d")
+    assert best_hand(cards).key() == (6, (14, 13))
+    assert best_hand(cards).name == "фулл-хаус"
+
+
+def test_player_plays_the_board_flush():
+    cards = parse_cards("2c 3d Ah Kh Qh Jh 9h")
+    assert best_hand(cards).name == "флеш"
+    assert best_hand(cards).key() == (5, (14, 13, 12, 11, 9))
+
+
+def test_six_cards_drops_the_small_kicker():
+    cards = parse_cards("Ah Ad Ks Qd Jc 2c")
+    assert best_hand(cards).key() == (1, (14, 13, 12, 11))
+
+
+def test_board_length_other_than_five_six_seven_rejected():
+    with pytest.raises(ValueError):
+        best_hand(parse_cards("As Kd Qc Jh"))
