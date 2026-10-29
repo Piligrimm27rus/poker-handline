@@ -348,7 +348,7 @@ git commit -m "feat: parse cards and build a 52-card deck"
 
 Категории, от старшей к младшей: 8 стрит-флеш (роял-флеш — то же 8 со старшей картой 14 и именем `роял-флеш`), 7 каре, 6 фулл-хаус, 5 флеш, 4 стрит, 3 тройка, 2 две пары, 1 пара, 0 старшая карта.
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 from poker_handline.cards import parse_cards
@@ -387,7 +387,7 @@ def test_pair_kicker_order():
     assert rank("Ah Ad Ks Qd 2c").key() > rank("Ah Ad Qs Jd 9c").key()
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_evaluator.py -v
@@ -395,7 +395,7 @@ def test_pair_kicker_order():
 
 Ожидание: FAIL, `rank_five` не определён.
 
-- [ ] **Step 3: Реализация `rank_five`**
+- [x] **Step 3: Реализация `rank_five`**
 
 Отсортировать ранги по убыванию. Флеш — одна масть. Стрит — пять разных рангов, у которых `max - min == 4`, либо набор `{14, 5, 4, 3, 2}` со старшей картой стрита `5` (колесо не бьёт шестёрку-старшую). Иначе старшая карта стрита — максимальный ранг.
 
@@ -415,7 +415,7 @@ def test_pair_kicker_order():
 
 Пять карт с повтором ранга больше четырёх или с дублем одной и той же карты в этот модуль не попадают: дубли ловит `parse_cards`, а `rank_five` предполагает уже различные `Card`.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_evaluator.py tests/test_cards.py -v
@@ -423,7 +423,7 @@ def test_pair_kicker_order():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/evaluator.py tests/test_evaluator.py
