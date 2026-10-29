@@ -1026,7 +1026,7 @@ git commit -m "feat: add a CLI for one-hand analysis"
 
 Мусорные карты — 400 и `{"error": "<текст ValueError>"}`. В фазе 2 нарратор только шаблонный: страница не зависит от ключа.
 
-- [ ] **Step 1: Тест через `TestClient`**
+- [x] **Step 1: Тест через `TestClient`**
 
 ```python
 from fastapi.testclient import TestClient
@@ -1060,23 +1060,23 @@ def test_analyze_rejects_bad_cards():
     assert response.json()["error"]
 ```
 
-- [ ] **Step 2: Запустить и увидеть FAIL**
+- [x] **Step 2: Запустить и увидеть FAIL**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_api.py -v
 ```
 
-- [ ] **Step 3: `create_app` с одним POST**
+- [x] **Step 3: `create_app` с одним POST**
 
 Pydantic-модель входа. `ValueError` → 400. Импорт FastAPI внутри функции не прятать: зависимость объявлена в extra `app`.
 
-- [ ] **Step 4: PASS**
+- [x] **Step 4: PASS**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_api.py -v
 ```
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/api.py tests/test_api.py
