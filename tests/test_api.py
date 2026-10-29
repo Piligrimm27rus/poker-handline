@@ -27,3 +27,10 @@ def test_analyze_rejects_bad_cards():
     )
     assert response.status_code == 400
     assert response.json()["error"]
+
+
+def test_index_has_the_form():
+    client = TestClient(create_app())
+    text = client.get("/").text
+    for piece in ("hero", "board", "villain", "pot", "to_call", "/api/analyze", "Разобрать"):
+        assert piece in text

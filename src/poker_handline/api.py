@@ -1,5 +1,7 @@
+from pathlib import Path
+
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
 
 from poker_handline.narrate import TemplateNarrator
@@ -16,6 +18,11 @@ class AnalyzeIn(BaseModel):
 
 def create_app() -> FastAPI:
     app = FastAPI()
+
+    @app.get("/", response_class=HTMLResponse)
+    def index() -> HTMLResponse:
+        page = Path(__file__).parent / "web" / "index.html"
+        return HTMLResponse(page.read_text(encoding="utf-8"))
 
     @app.post("/api/analyze")
     def analyze(body: AnalyzeIn):

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Разбор раздачи</title>
+  <style>
+    html, body { margin: 0; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f4f1ea;
+      color: #1c1915;
+    }
+    main {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 32rem;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 2.5rem;
+    }
+    label { display: block; margin-top: 0.85rem; }
+    input, button { font: inherit; }
+    input {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      margin-top: 0.3rem;
+      padding: 0.4rem 0.5rem;
+    }
+    button { margin-top: 1rem; padding: 0.45rem 0.9rem; }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      margin-top: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Разбор раздачи</h1>
+    <form id="hand">
+      <label>Карты героя
+        <input name="hero" placeholder="AhKh" autocomplete="off" required>
+      </label>
+      <label>Борд
+        <input name="board" autocomplete="off">
+      </label>
+      <label>Рука или диапазон оппонента
+        <input name="villain" autocomplete="off" required>
+      </label>
+      <label>Банк
+        <input name="pot" type="number" min="0" step="1" required>
+      </label>
+      <label>Колл
+        <input name="to_call" type="number" min="0" step="1" required>
+      </label>
+      <button type="submit">Разобрать</button>
+    </form>
+    <pre id="result"></pre>
+  </main>
+  <script>
+    const form = document.getElementById("hand");
+    const result = document.getElementById("result");
+
+    function points(value) {
+      return (value * 100).toFixed(1).replace(".", ",");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const response = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          hero: data.get("hero"),
+          board: data.get("board"),
+          villain: data.get("villain"),
+          pot: Number(data.get("pot")),
+          to_call: Number(data.get("to_call")),
+        }),
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        result.textContent = body.error || "Ошибка";
+        return;
+      }
+      const price = body.required_equity == null ? "нет" : points(body.required_equity) + "%";
+      result.textContent = [
+        "Рука: " + body.hand_name,
+        "Эквити: " + points(body.equity_share) + "%",
+        "Нужно для колла: " + price,
+        "Решение: " + body.action,
+        body.narration,
+      ].join("\n");
+    });
+  </script>
+</body>
+</html>

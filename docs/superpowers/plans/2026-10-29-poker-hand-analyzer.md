@@ -1094,7 +1094,7 @@ git commit -m "feat: expose one-hand analysis over HTTP"
 - Consumes: `POST /api/analyze`
 - Produces: форма, которую можно открыть на `http://127.0.0.1:8000`
 
-- [ ] **Step 1: Тест, что `GET /` отдаёт форму**
+- [x] **Step 1: Тест, что `GET /` отдаёт форму**
 
 ```python
 def test_index_has_the_form():
@@ -1106,11 +1106,11 @@ def test_index_has_the_form():
 
 Это защита от пустой страницы, не замена ручной проверки в браузере.
 
-- [ ] **Step 2: FAIL, затем положить одну страницу**
+- [x] **Step 2: FAIL, затем положить одну страницу**
 
 `GET /` читает файл через `Path(__file__).parent / "web" / "index.html"`. Страница без сборщика: одна колонка, `max-width: 32rem`, поля с `name` ровно `hero`, `board`, `villain`, `pot`, `to_call`. Подписи: «Карты героя», «Борд», «Рука или диапазон оппонента», «Банк», «Колл». Кнопка «Разобрать». Результат — `<pre id="result">`. Плейсхолдер героя — `AhKh`. Скрипт делает `fetch("/api/analyze")`. На 400 пишет `error` в `#result` и не оставляет предыдущий успешный текст. На 200 пишет строки руки, эквити, требования колла, решения и `narration`.
 
-- [ ] **Step 3: Поднять сервер и пройти сценарий руками**
+- [x] **Step 3: Поднять сервер и пройти сценарий руками**
 
 ```powershell
 .\.venv\Scripts\python -m uvicorn poker_handline.api:create_app --factory --host 127.0.0.1 --port 8000
@@ -1123,7 +1123,7 @@ def test_index_has_the_form():
 3. Герой `Ax` → сообщение об ошибке, предыдущий успешный текст не остаётся как будто разбор удался.
 4. Узкое окно ~390px: форма в одну колонку, кнопка доступна без горизонтального скролла страницы.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add src/poker_handline/web/index.html src/poker_handline/api.py tests/test_api.py
