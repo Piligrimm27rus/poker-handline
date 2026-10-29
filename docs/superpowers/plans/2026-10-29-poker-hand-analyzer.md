@@ -719,7 +719,7 @@ git commit -m "feat: compute heads-up equity exactly and by monte carlo"
 - `to_call == 0` → `action="check"`, `required_equity=None`
 - `to_call > 0` → `required_equity = to_call / (pot + to_call)`. Если `equity.share + 1e-12 >= required_equity` → `call`, иначе `fold`
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import pytest
@@ -756,7 +756,7 @@ def test_negative_money_rejected():
         build_report("AsKh", "Td 9c 2s", "QQ", pot=-1, to_call=0)
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_report.py -v
@@ -764,13 +764,13 @@ def test_negative_money_rejected():
 
 Ожидание: FAIL, модуль `report` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 `build_report` вызывает `equity`, затем выставляет имя и действие по правилам выше. Поля `hero`, `board`, `villain` хранят уже нормализованный ввод: карты через `parse_cards`, в отчёт кладутся как `f"{rank_char}{suit}"` в том порядке, в котором их распарсили. Для туза пики — `As`, для десятки — `Td`.
 
 Никакого рейза и никакого размера ставки. При `to_call == 0` шаблон из задачи 8 говорит, что размер ставки эта версия не выбирает.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_report.py -v
@@ -778,7 +778,7 @@ def test_negative_money_rejected():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/report.py tests/test_report.py
