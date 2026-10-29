@@ -267,7 +267,7 @@ git commit -m "chore: scaffold poker-handline package"
 - Consumes: нет
 - Produces: `Card`, `parse_card`, `parse_cards`, `deck`
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import pytest
@@ -309,7 +309,7 @@ def test_deck_has_52_unique_cards():
     assert cards == deck()
 ```
 
-- [ ] **Step 2: Запустить тест и увидеть импорт-ошибку**
+- [x] **Step 2: Запустить тест и увидеть импорт-ошибку**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_cards.py -v
@@ -317,11 +317,11 @@ def test_deck_has_52_unique_cards():
 
 Ожидание: FAIL, модуль `cards` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 Ранги: `2 3 4 5 6 7 8 9 T J Q K A` → `2..14`. Масти: `s h d c`. Регистр буквы ранга не важен, масть приводится к нижнему. `parse_cards` удаляет пробелы и режет строку по 2 символа. Повтор карты и нечётная длина — `ValueError`. `deck` — двойной цикл мастей `s,h,d,c` и рангов от 2 до 14.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_cards.py -v
@@ -329,7 +329,7 @@ def test_deck_has_52_unique_cards():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/cards.py tests/test_cards.py
