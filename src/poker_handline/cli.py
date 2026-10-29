@@ -1,10 +1,13 @@
 import argparse
+import json
 import os
 import sys
 from collections.abc import Callable
 
 from poker_handline.narrate import LLMNarrator, TemplateNarrator
 from poker_handline.report import HandReport, build_report
+from poker_handline.session_narrate import LLMSessionNarrator, narrate_session
+from poker_handline.stats import load_session, summarize
 
 _LLM_BASE = "POKER_HANDLINE_LLM_BASE_URL"
 _LLM_KEY = "POKER_HANDLINE_LLM_API_KEY"
@@ -12,6 +15,10 @@ _LLM_MODEL = "POKER_HANDLINE_LLM_MODEL"
 
 
 def main(argv: list[str] | None = None, narrator_factory: Callable[[], object] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if argv and argv[0] == "session":
+        return _session_main(argv[1:])
     parser = argparse.ArgumentParser(prog="poker-handline")
     parser.add_argument("--hero", required=True)
     parser.add_argument("--villain", required=True)
@@ -42,6 +49,35 @@ def main(argv: list[str] | None = None, narrator_factory: Callable[[], object] |
     print("---")
     print(paragraph)
     return 0
+
+
+def _session_main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(prog="poker-handline session")
+    parser.add_argument("path")
+    args = parser.parse_args(argv)
+    try:
+        summary = summarize(load_session(args.path))
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(exc, file=sys.stderr)
+        return 2
+    paragraph = narrate_session(summary)
+    narrator = _session_narrator()
+    if narrator is not None:
+        try:
+            paragraph = narrator.narrate(summary)
+        except Exception:
+            paragraph = narrate_session(summary)
+    print(paragraph)
+    return 0
+
+
+def _session_narrator() -> LLMSessionNarrator | None:
+    base_url = os.environ.get(_LLM_BASE)
+    api_key = os.environ.get(_LLM_KEY)
+    model = os.environ.get(_LLM_MODEL)
+    if base_url and api_key and model:
+        return LLMSessionNarrator(base_url, api_key, model)
+    return None
 
 
 def _narrator(factory: Callable[[], object] | None):

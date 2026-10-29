@@ -20,3 +20,13 @@ def test_cli_rejects_bad_cards(capsys):
     err = capsys.readouterr().err
     assert code == 2
     assert err
+
+
+def test_cli_session_prints_calculated_stats_without_network(capsys, monkeypatch):
+    monkeypatch.delenv("POKER_HANDLINE_LLM_BASE_URL", raising=False)
+    monkeypatch.delenv("POKER_HANDLINE_LLM_API_KEY", raising=False)
+    monkeypatch.delenv("POKER_HANDLINE_LLM_MODEL", raising=False)
+    code = main(["session", "tests/fixtures/session_six_hands.json"])
+    out = capsys.readouterr().out
+    assert code == 0
+    assert "VPIP 83,3%" in out
