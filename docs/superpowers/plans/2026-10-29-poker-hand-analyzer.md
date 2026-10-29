@@ -520,7 +520,7 @@ git commit -m "feat: choose the best five cards from six or seven"
 - Карта из `dead` выкидывает любую комбинацию, которая её содержит. Пустой результат — `ValueError`.
 - Неизвестный токен (`AKz`, `QQ-`, `AKs+s`) — `ValueError`.
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import pytest
@@ -563,7 +563,7 @@ def test_bad_token():
         expand_range("AKz")
 ```
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_ranges.py -v
@@ -571,7 +571,7 @@ def test_bad_token():
 
 Ожидание: FAIL, модуль `ranges` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 Разбить по запятой. Для токена:
 
@@ -584,7 +584,7 @@ def test_bad_token():
 
 Комбинация — `frozenset` из двух `Card`. Пересечение с `dead` удаляет комбо. Пустое множество после фильтра — `ValueError` с текстом нотации.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_ranges.py -v
@@ -592,7 +592,7 @@ def test_bad_token():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/ranges.py tests/test_ranges.py
