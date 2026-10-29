@@ -821,7 +821,7 @@ git commit -m "feat: turn equity and pot odds into a hand report"
 
 User-сообщение — `json.dumps` отчёта с полями `hand_name`, `villain`, `equity_share`, `required_equity`, `action`, `method`. Ответ модели прогоняется через проверку: в тексте есть `hand_name`, есть процент эквити в том виде, в каком его печатает шаблон (`82,2%`), и есть русское слово действия. Если проверки нет — `ValueError`, наружу отдаётся текст шаблона. Вызывающий код ловит ошибку провайдера и тоже отдаёт шаблон: сеть не должна ломать CLI.
 
-- [ ] **Step 1: Падающий тест**
+- [x] **Step 1: Падающий тест**
 
 ```python
 import json
@@ -866,7 +866,7 @@ def test_llm_narrator_rejects_a_changed_action():
 
 Зависимость `httpx` в этом тесте — из extra `llm`. Установить её в окружение ещё в задаче 1 (`pip install -e ".[app,llm]"`).
 
-- [ ] **Step 2: Убедиться, что тест падает**
+- [x] **Step 2: Убедиться, что тест падает**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_narrate.py -v
@@ -874,13 +874,13 @@ def test_llm_narrator_rejects_a_changed_action():
 
 Ожидание: FAIL, модуль `narrate` не найден.
 
-- [ ] **Step 3: Реализация**
+- [x] **Step 3: Реализация**
 
 `TemplateNarrator.narrate` форматирует один из двух абзацев. Процент: `f"{value * 100:.1f}".replace(".", ",") + "%"`.
 
 `LLMNarrator.narrate` использует `httpx.Client(transport=transport, timeout=30)` если transport передан, иначе обычный клиент. POST `{base_url}/chat/completions`, заголовок `Authorization: Bearer {api_key}`. После ответа вызвать ту же процентную форму, что и шаблон, и проверить вхождение. Провал проверки — `ValueError`. Этот класс сам на шаблон не откатывается: откат делает CLI, чтобы тест видел отказ.
 
-- [ ] **Step 4: Тест зелёный**
+- [x] **Step 4: Тест зелёный**
 
 ```powershell
 .\.venv\Scripts\python -m pytest tests/test_narrate.py -v
@@ -888,7 +888,7 @@ def test_llm_narrator_rejects_a_changed_action():
 
 Ожидание: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/poker_handline/narrate.py tests/test_narrate.py
